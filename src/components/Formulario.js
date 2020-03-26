@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { obtenerDiferenciaYear } from '../helper';
 
 const Campo = styled.div`
   display: flex;
@@ -87,7 +88,15 @@ const Formulario = () => {
 
     // cosas que hacer:
     // 1 el seguro cada ano va a ser mas barato ==> obterner la diferencia de anos
-    // por cada ano hay q restar el 3%
+    const diferenciaYear = obtenerDiferenciaYear(year);
+
+    console.log(diferenciaYear);
+    // por cada ano hay q restar el 3% hay q tener una base, que sera de 2000 a la que restarle el 3%
+    let resultado = 2000;
+
+    resultado -= (( diferenciaYear * 3 ) * resultado ) / 100;
+
+    console.log(resultado);
     // Cada marca va a tener un precio != ==> Americano 15%, Asatico 5% Europeo 30%
     // Cada tipo se seguro va a tener un precio != Basico 20% completo 50%
 
