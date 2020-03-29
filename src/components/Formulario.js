@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { obtenerDiferenciaYear, calcularMarca } from '../helper';
+import { obtenerDiferenciaYear, calcularMarca, obtenerPlan } from '../helper';
 
 const Campo = styled.div`
   display: flex;
@@ -95,15 +95,17 @@ const Formulario = () => {
     let resultado = 2000;
 
     resultado -= (( diferenciaYear * 3 ) * resultado ) / 100;
-    console.log(resultado);
+    console.log("diferenciaYear ", resultado);
 
     // Cada marca va a tener un precio != ==> Americano 15%, Asatico 5% Europeo 30%
     resultado = calcularMarca(marca) * resultado; // lo multiplicamos por resultado pq es un incremento.
-    console.log(resultado);
+    console.log("calcularMarca ", resultado);
 
     // Cada tipo se seguro va a tener un precio != Basico 20% completo 50%
-
-
+    const incrementoPlan = obtenerPlan(plan);
+    // para que sea bonito:
+    resultado = parseFloat( obtenerPlan(plan) * resultado ) .toFixed(2);
+    console.log("obtenerPlan ", resultado);
   }
 
 	return (

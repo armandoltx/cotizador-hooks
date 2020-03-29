@@ -23,3 +23,10 @@ export function calcularMarca(marca) {
 
   return incremento;
 }
+
+// Calcula el total a pagar en funcion del precio
+// Cada tipo se seguro va a tener un precio != Basico 20% completo 50%
+
+export function obtenerPlan(plan) {
+  return (plan === 'basico') ? 1.20 : 1.50;
+}
