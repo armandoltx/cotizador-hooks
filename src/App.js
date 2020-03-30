@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
 import Resumen from './components/Resumen';
+import Resultado from './components/Resultado';
 
 import styled from '@emotion/styled';
 
@@ -29,7 +30,8 @@ function App() {
   });
 
   // extraer datos ( no necesitamos la cotizacion por ahora)
-  const { datos } = resumen;
+  // para mostrar el resultado necesitamos la cotizacion, asi q tb la extraemos aqui:
+  const { cotizacion, datos } = resumen;
 
   return (
     <Contenedor>
@@ -38,6 +40,7 @@ function App() {
       <ContenedorFormulario>
         <Formulario guardarResumen={guardarResumen}/>
         <Resumen datos ={datos}/>
+        <Resultado cotizacion={cotizacion}/>
       </ContenedorFormulario>
     </Contenedor>
   );
