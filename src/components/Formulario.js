@@ -51,7 +51,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Formulario = () => {
+const Formulario = ({guardarResumen}) => {
 
   // crear el state, puede ser un objeto o por separado con variables
   const [datos, guardarDatos] = useState({
@@ -75,10 +75,10 @@ const Formulario = () => {
 
   // cuando el usuario presiona submit
   const cotizarSeguro = e => {
-    // prevenir el comportamiento del formulario por default
+    //== prevenir el comportamiento del formulario por default
     e.preventDefault();
 
-    //validar el formulario, que no este vacio
+    //== validar el formulario, que no este vacio
     if(marca.trim() === '' || year.trim() === '' || plan.trim() === '' ) {
       guardarError(true);
       return;
@@ -106,6 +106,12 @@ const Formulario = () => {
     // para que sea bonito:
     resultado = parseFloat( obtenerPlan(plan) * resultado ) .toFixed(2);
     console.log("obtenerPlan ", resultado);
+
+    //== Una vez que tenemos el resultado lo pasamos al componente ppal:
+    guardarResumen({
+      cotizacion: resultado,
+      datos // datos es un objeto dentro de otro ==> datos: datos || viene del state creado al ppo de la pag.
+    });
   }
 
 	return (

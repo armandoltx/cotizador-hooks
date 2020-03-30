@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
+import Resumen from './components/Resumen';
 
 import styled from '@emotion/styled';
 
@@ -15,12 +16,28 @@ const ContenedorFormulario = styled.div`
 `;
 
 function App() {
+
+  // agregamos useState y creamos este state, para pasar los datos del formulario al componente ppal,
+  //para usarlo en otros componentes ==> Resumen y resultado
+  const [ resumen, guardarResumen ] = useState({
+    cotizacion: 0,
+    datos: {
+      marca: '',
+      year: '',
+      plan: ''
+    }
+  });
+
+  // extraer datos ( no necesitamos la cotizacion por ahora)
+  const { datos } = resumen;
+
   return (
     <Contenedor>
       <Header titulo='Cotizador de Seguros' />
 
       <ContenedorFormulario>
-        <Formulario />
+        <Formulario guardarResumen={guardarResumen}/>
+        <Resumen datos ={datos}/>
       </ContenedorFormulario>
     </Contenedor>
   );
