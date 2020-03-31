@@ -51,7 +51,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Formulario = ({guardarResumen}) => {
+const Formulario = ({ guardarResumen, guardarCargando}) => {
 
   // crear el state, puede ser un objeto o por separado con variables
   const [datos, guardarDatos] = useState({
@@ -108,10 +108,20 @@ const Formulario = ({guardarResumen}) => {
     console.log("obtenerPlan ", resultado);
 
     //== Una vez que tenemos el resultado lo pasamos al componente ppal:
-    guardarResumen({
-      cotizacion: resultado,
-      datos // datos es un objeto dentro de otro ==> datos: datos || viene del state creado al ppo de la pag.
-    });
+    // ahora agregamos el spinner
+    guardarCargando(true);
+
+    setTimeout(() => {
+
+      // quitamos el spinner
+      guardarCargando(false);
+
+      // pasamos los datos al componente ppal.
+      guardarResumen({
+        cotizacion: resultado,
+        datos // datos es un objeto dentro de otro ==> datos: datos || viene del state creado al ppo de la pag.
+      });
+    }, 2000);
   }
 
 	return (
