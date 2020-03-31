@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 import { obtenerDiferenciaYear, calcularMarca, obtenerPlan } from '../helper';
 
 const Campo = styled.div`
@@ -51,7 +52,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Formulario = ({ guardarResumen, guardarCargando}) => {
+const Formulario = ({ guardarResumen, guardarCargando }) => {
 
   // crear el state, puede ser un objeto o por separado con variables
   const [datos, guardarDatos] = useState({
@@ -118,7 +119,7 @@ const Formulario = ({ guardarResumen, guardarCargando}) => {
 
       // pasamos los datos al componente ppal.
       guardarResumen({
-        cotizacion: resultado,
+        cotizacion: Number(resultado), // pasamos Number(), pq al agragarle los props noe hemos dado cuenta que pasa el resultado como un string
         datos // datos es un objeto dentro de otro ==> datos: datos || viene del state creado al ppo de la pag.
       });
     }, 2000);
@@ -186,5 +187,10 @@ const Formulario = ({ guardarResumen, guardarCargando}) => {
 		</form>
 	);
 };
+
+Formulario.propTypes = {
+  guardarResumen: PropTypes.func.isRequired,
+  guardarCargando: PropTypes.func.isRequired
+}
 
 export default Formulario;
